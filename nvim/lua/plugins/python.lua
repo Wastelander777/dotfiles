@@ -31,9 +31,9 @@ return {
 
     -- Setup Mason LSPconfig to ensure LSP servers are installed
     require("mason-lspconfig").setup {
-      ensure_installed = { "pyright", "ruff", "yamlls" },
+      ensure_installed = { "pyright", "ruff", "yamlls", "jdtls" },
     }
-
+    require("lspconfig").jdtls.setup {}
     -- Setup Mason for null-ls to ensure formatters/linters are installed
     require("mason-tool-installer").setup {
       ensure_installed = { "black", "mypy", "ruff", "isort", "flake8" },
@@ -59,5 +59,4 @@ return {
       },
     }
   end,
-
 }

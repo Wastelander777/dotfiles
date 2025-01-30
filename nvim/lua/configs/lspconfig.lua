@@ -1,10 +1,12 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 require("lspconfig").yamlls.setup {}
+require("lspconfig").terraformls.setup {}
+require("lspconfig").jdtls.setup {}
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "pyright", "lua_ls", "ruff", "yamlls" }
+local servers = { "pyright", "lua_ls", "ruff", "yamlls", "terraformls", "jdtls" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
@@ -160,6 +162,8 @@ require'lspconfig'.ruff_lsp.setup{
     root_dir = [[root_pattern("pyproject.toml", "ruff.toml", ".git")]],
   },
 }
+
+-- Java LSP
 
 -- configuring single server, example: typescript
 -- lspconfig.ts_ls.setup {

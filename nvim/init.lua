@@ -1,15 +1,16 @@
--- Install 'mini.nvim' if not already present
+-- File: init.lua
+
+-- 1. Bootstrap mini.nvim if not installed
 local path_package = vim.fn.stdpath("data") .. "/site"
 local mini_path = path_package .. "/pack/deps/start/mini.nvim"
 
 if not vim.loop.fs_stat(mini_path) then
-  vim.cmd('echo "Installing `mini.nvim`" | redraw')
+  vim.cmd('echo "Installing `mini.nvim`..." | redraw')
   local clone_cmd = {
     "git",
     "clone",
     "--filter=blob:none",
-    -- Uncomment next line to use the 'stable' branch of mini.nvim
-    -- '--branch', 'stable',
+    -- '--branch', 'stable',  -- Uncomment if you want the stable branch
     "https://github.com/echasnovski/mini.nvim",
     mini_path,
   }
@@ -17,48 +18,55 @@ if not vim.loop.fs_stat(mini_path) then
   vim.cmd("packadd mini.nvim | helptags ALL")
 end
 
--- Set global variables for cache path and leader key
+-- 2. Global variables
 vim.g.base46_cache = vim.fn.stdpath("data") .. "/nvchad/base46/"
-vim.g.mapleader = " " -- Use space as the leader key
+vim.g.mapleader = " "
 
--- Bootstrap 'lazy.nvim' and load plugins
+-- 3. Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
 if not vim.uv.fs_stat(lazypath) then
   local repo = "https://github.com/folke/lazy.nvim.git"
-  vim.fn.system({ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath })
+  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
 end
-
 vim.opt.rtp:prepend(lazypath)
 
--- Load 'lazy.nvim' configuration
+-- 4. Load lazy config
 local lazy_config = require("configs.lazy")
 
--- Setup 'lazy.nvim' with plugins
+-- 5. Setup lazy.nvim (loading all plugin specs)
 require("lazy").setup({
   {
     "NvChad/NvChad",
-    lazy = false, -- Load NvChad immediately
-    branch = "v2.5", -- Specify branch version
-    import = "nvchad.plugins", -- Import NvChad plugin settings
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
   },
-  { import = "plugins" }, -- Import additional plugins defined in 'plugins.lua'
+  { import = "plugins" }, -- imports your lua/plugins/*.lua specs
 }, lazy_config)
 
--- Load the theme settings
-dofile(vim.g.base46_cache .. "defaults")   -- Load theme defaults
-dofile(vim.g.base46_cache .. "statusline") -- Load statusline configuration
+-- 6. Load theme + UI config from NvChad
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
 
--- Load Neovim options and autocommands
+-- 7. Load general Neovim options / NVChad autocommands
 require("options")
 require("nvchad.autocmds")
 
--- Schedule mappings after other components have loaded
-vim.schedule(function()
-  require("mappings")
-end)
+-----------------------------------------------------------------------
+-- AUTOCMDs
+-----------------------------------------------------------------------
+-- Format Terraform on save (again, recommended to do in your LSP config)
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*.tf", "*.tfvars" },
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
 
--- Restore cursor to last edited position when reopening files
+-- Group for miscellaneous autocmds
+local misc_augroup = vim.api.nvim_create_augroup("misc_augroup", { clear = true })
+
+-- Restore cursor to last position
 vim.api.nvim_create_autocmd("BufReadPost", {
   desc = "Open file at the last position it was edited earlier",
   group = misc_augroup,
@@ -66,18 +74,43 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   command = 'silent! normal! g`"zv',
 })
 
--- Setup 'nvim-treesitter' with automatic parser installation
-require("nvim-treesitter.configs").setup({
-  -- List of parsers to ensure are always installed
-  ensure_installed = { "c", "python", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "yaml" },
-  sync_install = true, -- Install parsers synchronously
-  auto_install = true, -- Automatically install missing parsers
-  sync_root_with_cwd = true, -- Automatically refresh directory
-})
+-----------------------------------------------------------------------
+-- TREESITTER SETUP
+-----------------------------------------------------------------------
+-- If you're not configuring nvim-treesitter in a plugin spec, do it here:
+require("nvim-treesitter.configs").setup {
+  ensure_installed = {
+    "c",
+    "python",
+    "lua",
+    "vim",
+    "vimdoc",
+    "query",
+    "markdown",
+    "markdown_inline",
+    "yaml",
+    "java",
+  },
+  sync_install = true,
+  auto_install = true,
+  sync_root_with_cwd = true,
+  highlight = {
+    enable = true,
+  },
+}
 
--- Setup additional plugins
-require("oil").setup()          -- File explorer plugin
--- require("mini.align").setup()   -- Text alignment plugin
--- require('mini.ai').setup()    -- Advanced text objects (commented out for now)
-require("mini.animate").setup() -- Smooth scrolling and window transitions
-require("mini.basics").setup()  -- Basic settings like better mappings
+-----------------------------------------------------------------------
+-- OTHER PLUGINS
+-----------------------------------------------------------------------
+-- For example, if `oil.nvim` or mini plugins aren’t configured in plugin specs:
+require("oil").setup()
+require("mini.animate").setup()
+require("mini.basics").setup()
+
+-----------------------------------------------------------------------
+-- KEY MAPPINGS
+-----------------------------------------------------------------------
+-- If you prefer to load key mappings after everything else:
+vim.schedule(function()
+  require("mappings") -- your custom mappings
+end)
