@@ -12,7 +12,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require("configs.lspconfig")
+      require "configs.lspconfig"
     end,
   },
 
@@ -52,6 +52,7 @@ return {
           "pyright",
           "yamlls",
           "jdtls",
+          "lemminx",
           -- for Python: "ruff_lsp" if you prefer ruff-lsp
         },
       }
@@ -61,8 +62,8 @@ return {
         ensure_installed = {
           -- Python tooling
           "debugpy", -- for debugging
-          "mypy",    -- type checker
-          "ruff",    -- python linter
+          "mypy", -- type checker
+          "ruff", -- python linter
           "flake8",
           "black",
           "isort",
@@ -142,4 +143,7 @@ return {
   {
     "mfussenegger/nvim-jdtls",
   },
+
+  -- 10. nvim-java
+  { "nvim-java/nvim-java" },
 }
