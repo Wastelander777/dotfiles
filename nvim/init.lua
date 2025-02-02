@@ -91,6 +91,7 @@ require("nvim-treesitter.configs").setup {
     "yaml",
     "java",
     "xml",
+    "bash",
   },
   sync_install = true,
   auto_install = true,
