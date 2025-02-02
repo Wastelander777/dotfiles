@@ -1,12 +1,13 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
+require("java").setup()
 require("lspconfig").yamlls.setup {}
 require("lspconfig").terraformls.setup {}
 require("lspconfig").jdtls.setup {}
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "pyright", "lua_ls", "ruff", "yamlls", "terraformls", "jdtls" }
+local servers = { "pyright", "lua_ls", "ruff", "yamlls", "terraformls", "jdtls", "lemminx"}
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
