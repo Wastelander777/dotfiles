@@ -6,7 +6,7 @@ require("lspconfig").jdtls.setup {}
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "pyright", "lua_ls", "ruff", "yamlls", "terraformls", "jdtls", "lemminx","bashls"}
+local servers = { "pyright", "lua_ls", "ruff", "yamlls", "terraformls", "jdtls", "lemminx", "bashls", "flake8" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
