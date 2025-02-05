@@ -1,6 +1,5 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
-require("java").setup()
 require("lspconfig").yamlls.setup {}
 require("lspconfig").terraformls.setup {}
 require("lspconfig").jdtls.setup {}

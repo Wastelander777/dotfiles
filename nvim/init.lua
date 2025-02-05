@@ -80,7 +80,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- If you're not configuring nvim-treesitter in a plugin spec, do it here:
 require("nvim-treesitter.configs").setup {
   ensure_installed = {
-    "c",
     "python",
     "lua",
     "vim",
