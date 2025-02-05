@@ -27,6 +27,7 @@ return {
         "python",
         "yaml",
         "java",
+        "bash",
         -- etc. Add more languages you need for syntax highlighting
       },
       highlight = { enable = true },
@@ -53,6 +54,12 @@ return {
           "yamlls",
           "jdtls",
           "lemminx",
+          "lua_ls",
+          "ruff",
+          "terraformls",
+          "lemminx",
+          "bashls",
+          "flake8",
           -- for Python: "ruff_lsp" if you prefer ruff-lsp
         },
       }
@@ -144,6 +151,6 @@ return {
     "mfussenegger/nvim-jdtls",
   },
 
-  -- 10. nvim-java
-  { "nvim-java/nvim-java" },
+  -- -- 10. nvim-java
+  -- { "nvim-java/nvim-java" },
 }
