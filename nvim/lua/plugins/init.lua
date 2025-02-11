@@ -146,11 +146,6 @@ return {
     },
   },
 
-  -- 9. Java LSP
-  {
-    "mfussenegger/nvim-jdtls",
-  },
-
-  -- -- 10. nvim-java
-  -- { "nvim-java/nvim-java" },
+  -- 9. nvim-java
+  { "nvim-java/nvim-java" },
 }
