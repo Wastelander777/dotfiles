@@ -7,7 +7,7 @@ return {
     -- Plugin to integrate Mason with LSPconfig
     "williamboman/mason-lspconfig.nvim",
     -- Plugin for formatters and linters using Mason
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     -- Plugin to use Mason with null-ls
     "jay-babu/mason-null-ls.nvim",
     -- Mason Tool installer for plugins

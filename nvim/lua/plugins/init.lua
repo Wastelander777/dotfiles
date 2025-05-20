@@ -40,7 +40,7 @@ return {
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim",
     },
     config = function()
       -- Setup Mason
@@ -79,21 +79,15 @@ return {
       }
 
       -- Setup null-ls for diagnostics/formatting
-      local null_ls = require "null-ls"
-      null_ls.setup {
+      require("null-ls").setup {
         sources = {
-          -- Standard Lua
-          null_ls.builtins.formatting.stylua,
-
-          -- Example JS/TS
-          null_ls.builtins.diagnostics.eslint,
-
-          -- Python tools
-          null_ls.builtins.formatting.black,
-          null_ls.builtins.formatting.isort,
-          null_ls.builtins.diagnostics.mypy,
-          null_ls.builtins.diagnostics.ruff,
-          null_ls.builtins.diagnostics.flake8,
+          require("null-ls").builtins.formatting.stylua,
+          require("null-ls").builtins.diagnostics.eslint,
+          require("null-ls").builtins.formatting.black,
+          require("null-ls").builtins.formatting.isort,
+          require("null-ls").builtins.diagnostics.mypy,
+          require("null-ls").builtins.diagnostics.ruff,
+          require("null-ls").builtins.diagnostics.flake8,
         },
       }
     end,
@@ -146,6 +140,11 @@ return {
     },
   },
 
-  -- 9. nvim-java
-  { "nvim-java/nvim-java" },
+  -- 9. Java LSP
+  {
+    "mfussenegger/nvim-jdtls",
+  },
+
+  -- -- 10. nvim-java
+  -- { "nvim-java/nvim-java" },
 }
