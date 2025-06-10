@@ -1,54 +1,45 @@
+-- File: lua/plugins/python.lua
 return {
-  -- Mason plugin to manage tools
-  "williamboman/mason.nvim",
-  dependencies = {
-    -- Plugin to configure LSP servers
-    "neovim/nvim-lspconfig",
-    -- Plugin to integrate Mason with LSPconfig
+  -- Tell Mason to grab Python binaries
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed or {}, {
+        "black",
+        "isort",
+        "mypy",
+        "ruff",
+      })
+    end,
+  },
+
+  -- Tell Mason-lspconfig to ensure these LSPs
+  {
     "williamboman/mason-lspconfig.nvim",
-    -- Plugin for formatters and linters using Mason
+    opts = function(_, opts)
+      opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed or {}, { "pyright", "ruff" })
+    end,
+  },
+
+  -- Add Python linters / formatters to null-ls
+  {
     "nvimtools/none-ls.nvim",
-    -- Plugin to use Mason with null-ls
-    "jay-babu/mason-null-ls.nvim",
-    -- Mason Tool installer for plugins
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    opts = function(_, opts)
+      local nls = require "null-ls"
+      vim.list_extend(opts.sources, {
+        nls.builtins.formatting.black,
+        nls.builtins.formatting.isort,
+        nls.builtins.diagnostics.ruff,
+        -- nls.builtins.diagnostics.mypy, Duplicated error logs
+      })
+    end,
   },
-  opts = {
-    ensure_installed = {
-      "black", -- Python formatter
-      "debugpy", -- Debugger for Python
-      "mypy", -- Type checker for Python
-      "ruff", -- Linter for Python
-      "pyright", -- LSP for Python
-      "isort", -- Python import sorter
-    },
+
+  -- Extra Treesitter grammar (if you didn’t already add in init.lua)
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed or {}, { "python" })
+    end,
   },
-  config = function()
-    -- Setup Mason
-    require("mason").setup()
-
-    -- Setup Mason LSPconfig to ensure LSP servers are installed
-    require("mason-lspconfig").setup {
-      ensure_installed = { "pyright", "ruff", "yamlls", "jdtls" },
-    }
-    require("lspconfig").jdtls.setup {}
-    -- Setup Mason for null-ls to ensure formatters/linters are installed
-    require("mason-tool-installer").setup {
-      ensure_installed = { "black", "mypy", "ruff", "isort" },
-    }
-
-    -- Configure null-ls to integrate formatters and linters
-    local null_ls = require "null-ls"
-    null_ls.setup {
-      sources = {
-        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.completion.spell,
-        null_ls.builtins.formatting.black, -- Black for formatting
-        null_ls.builtins.formatting.isort, -- isort for sorting imports
-        null_ls.builtins.diagnostics.mypy, -- MyPy for type checking
-        null_ls.builtins.diagnostics.ruff, -- Ruff for linting
-      },
-    }
-  end,
 }
