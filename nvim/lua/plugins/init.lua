@@ -59,8 +59,6 @@ return {
           "terraformls",
           "lemminx",
           "bashls",
-          "flake8",
-          -- for Python: "ruff_lsp" if you prefer ruff-lsp
         },
       }
 
@@ -71,7 +69,6 @@ return {
           "debugpy", -- for debugging
           "mypy", -- type checker
           "ruff", -- python linter
-          "flake8",
           "black",
           "isort",
           -- etc.
@@ -87,7 +84,6 @@ return {
           require("null-ls").builtins.formatting.isort,
           require("null-ls").builtins.diagnostics.mypy,
           require("null-ls").builtins.diagnostics.ruff,
-          require("null-ls").builtins.diagnostics.flake8,
         },
       }
     end,
