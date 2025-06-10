@@ -21,8 +21,6 @@ return {
       "ruff", -- Linter for Python
       "pyright", -- LSP for Python
       "isort", -- Python import sorter
-      -- "pylint", -- Python linter
-      "flake8", -- Python linter
     },
   },
   config = function()
@@ -36,9 +34,8 @@ return {
     require("lspconfig").jdtls.setup {}
     -- Setup Mason for null-ls to ensure formatters/linters are installed
     require("mason-tool-installer").setup {
-      ensure_installed = { "black", "mypy", "ruff", "isort", "flake8" },
+      ensure_installed = { "black", "mypy", "ruff", "isort" },
     }
-    require("null-ls").setup()
 
     -- Configure null-ls to integrate formatters and linters
     local null_ls = require "null-ls"
@@ -51,11 +48,6 @@ return {
         null_ls.builtins.formatting.isort, -- isort for sorting imports
         null_ls.builtins.diagnostics.mypy, -- MyPy for type checking
         null_ls.builtins.diagnostics.ruff, -- Ruff for linting
-        -- null_ls.builtins.diagnostics.pylint.with {
-        --   diagnostic_config = { underline = false, virtual_text = false, signs = false },
-        --   method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-        -- },
-        null_ls.builtins.diagnostics.flake8, -- Flake8 for linting
       },
     }
   end,
