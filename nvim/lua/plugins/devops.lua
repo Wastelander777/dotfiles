@@ -30,7 +30,7 @@ return {
     opts = function(_, opts)
       opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed or {}, {
         "bashls",
-        "yamlls",
+        -- "yamlls",  Declared on init.lua, duplicated logs 
         "dockerls",
         "docker_compose_language_service",
         "terraformls",

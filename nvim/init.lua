@@ -38,7 +38,6 @@ require("lazy").setup({
 
 require("oil").setup()
 require("mini.animate").setup()
-require("mini.basics").setup()
 ---------------------------------------------------------------
 -- 4. Load NvChad’s theme & statusline after base46 cache exists
 ---------------------------------------------------------------
