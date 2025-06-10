@@ -51,6 +51,8 @@ dofile(vim.g.base46_cache .. "statusline")
 -- 7. Load general Neovim options / NVChad autocommands
 require "options"
 require "nvchad.autocmds"
+-- Silent yanks
+vim.keymap.set("x", "p", [["_dP]], { noremap = true, silent = true })
 
 -----------------------------------------------------------------------
 -- AUTOCMDs

@@ -24,8 +24,6 @@ require("null-ls").setup {
   sources = {
     require("null-ls").builtins.formatting.black,
     require("null-ls").builtins.formatting.isort,
-    -- require("null-ls").builtins.diagnostics.pylint,
-    require("null-ls").builtins.diagnostics.flake8,
     require("null-ls").builtins.formatting.stylua,
   },
   on_attach = function(client, bufnr)
@@ -137,37 +135,8 @@ return {
   },
   docs = {
     description = [[
-https://github.com/astral-sh/ruff-lsp
-
-A Language Server Protocol implementation for Ruff, an extremely fast Python linter and code transformation tool, written in Rust. It can be installed via pip.
-
-```sh
-pip install ruff-lsp
-```
-
-Extra CLI arguments for `ruff` can be provided via
-
-```lua
-require'lspconfig'.ruff_lsp.setup{
-  init_options = {
-    settings = {
-      -- Any extra CLI arguments for `ruff` go here.
-      args = {},
-    }
-  }
-}
-```
-
   ]],
     root_dir = [[root_pattern("pyproject.toml", "ruff.toml", ".git")]],
   },
 }
 
--- Java LSP
-
--- configuring single server, example: typescript
--- lspconfig.ts_ls.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
