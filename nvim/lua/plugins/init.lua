@@ -13,7 +13,7 @@ return {
   { "stevearc/oil.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
   { "folke/trouble.nvim", cmd = "Trouble", opts = {}, keys = { … } },
   { "echasnovski/mini.nvim", version = "*" },
-  { "mfussenegger/nvim-jdtls" }, -- Java DAP helper (optional)
+  { "mfussenegger/nvim-jdtls" }, -- Java DAP helper 
 
   --------------------------------------------------------------------------
   -- Everything Mason / LSP / null-ls related is pulled in *once* below
