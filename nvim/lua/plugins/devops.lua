@@ -11,11 +11,12 @@ return {
         "shellcheck",
         "shfmt",
         -- YAML
+        "yamllint",
         "yamlfmt",
         -- Docker
         "hadolint",
         -- Terraform
-        "terraform-fmt",
+        "terraform_fmt",
         "tflint",
       })
     end,
