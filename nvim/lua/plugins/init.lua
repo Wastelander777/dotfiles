@@ -11,7 +11,7 @@ return {
 
   { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
   { "stevearc/oil.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
-  { "folke/trouble.nvim", cmd = "Trouble", opts = {}, keys = { … } },
+  -- { "folke/trouble.nvim", cmd = "Trouble", opts = {}, keys = { … } },
   { "echasnovski/mini.nvim", version = "*" },
   { "mfussenegger/nvim-jdtls" }, -- Java DAP helper 
 

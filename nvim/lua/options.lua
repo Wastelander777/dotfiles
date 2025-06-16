@@ -1,28 +1,19 @@
-require "nvchad.options"
--- Enable inline diagnostics globally
+-- lua/options.lua ----------------------------------------------------------
+-- Pull in NvChad’s defaults first
+require("nvchad.options")
+
+-- Diagnostics --------------------------------------------------------------
 vim.diagnostic.config({
-  virtual_text = {
-    prefix = "●",   -- or "■", "▶", "", to match your taste
-    spacing = 2,
+  virtual_text = false, virtual_lines = { current_line = true },
+  float = {              -- opened with K or vim.diagnostic.open_float()
+    source = "always",
   },
-  signs = true,       -- keep the sign-column icons
-  underline = true,   -- red/yellow underlines
-  update_in_insert = false,
+  signs            = false,   -- keep coloured gutter icons
+  underline        = true,   -- red / yellow underlines
+  update_in_insert = false,  -- don’t spam while typing
 })
 
--- lua/options.lua  (or at the end of init.lua)
-vim.diagnostic.config({
-  virtual_text = {                -- inline text under the code
-    source = "always",            -- always show “[source]”
-  },
-  float = {                       -- popup opened with `K` / open_float()
-    source = "always",            -- always show “[source]”
-  },
-  signs = true,                   -- gutter icons keep their colours
-})
+-- Extra tweaks -------------------------------------------------------------
+-- Uncomment to highlight the whole line & number of the cursor position
+vim.o.cursorlineopt = "both"
 
-
--- add yours here!
-
--- local o = vim.o
--- o.cursorlineopt ='both' -- to enable cursorline!
