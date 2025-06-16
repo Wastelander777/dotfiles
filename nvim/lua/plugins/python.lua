@@ -4,10 +4,9 @@ return {
   {
     "williamboman/mason.nvim",
     opts = function(_, opts)
-      opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed or {}, {
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, {
         "black",
         "isort",
-        "mypy",
         "ruff",
       })
     end,
@@ -17,7 +16,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = function(_, opts)
-      opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed or {}, { "pyright", "ruff" })
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, { "pyright", "ruff" })
     end,
   },
 
@@ -26,12 +25,6 @@ return {
     "nvimtools/none-ls.nvim",
     opts = function(_, opts)
       local nls = require "null-ls"
-      vim.list_extend(opts.sources, {
-        nls.builtins.formatting.black,
-        nls.builtins.formatting.isort,
-        nls.builtins.diagnostics.ruff,
-        -- nls.builtins.diagnostics.mypy, Duplicated error logs
-      })
     end,
   },
 

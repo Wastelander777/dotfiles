@@ -6,12 +6,11 @@ return {
   {
     "williamboman/mason.nvim",
     opts = function(_, opts)
-      opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed or {}, {
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, {
         -- Bash
         "shellcheck",
         "shfmt",
         -- YAML
-        "yamllint",
         "yamlfmt",
         -- Docker
         "hadolint",
@@ -28,7 +27,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = function(_, opts)
-      opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed or {}, {
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, {
         "bashls",
         "yamlls",
         "dockerls",
@@ -46,19 +45,6 @@ return {
     "nvimtools/none-ls.nvim",
     opts = function(_, opts)
       local nls = require "null-ls"
-      vim.list_extend(opts.sources, {
-        -- Bash
-        nls.builtins.diagnostics.shellcheck,
-        nls.builtins.formatting.shfmt,
-        -- YAML
-        nls.builtins.diagnostics.yamllint,
-        nls.builtins.formatting.yamlfmt,
-        -- Docker
-        nls.builtins.diagnostics.hadolint,
-        -- Terraform
-        nls.builtins.formatting.terraform_fmt,
-        nls.builtins.diagnostics.tflint,
-      })
     end,
   },
 
@@ -68,7 +54,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
-      opts.ensure_installed = vim.tbl_extend("force", opts.ensure_installed or {}, {
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, {
         "bash",
         "yaml",
         "terraform",

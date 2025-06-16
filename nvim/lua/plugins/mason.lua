@@ -7,16 +7,10 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
-    opts = { handlers = {} }, -- ← critical line
-  },
-
-  -- Optional helper that installs binaries on NVim start-up
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    lazy = false,
     opts = {
-      ensure_installed = {}, -- language-specific specs extend this
-      run_on_start = true, -- fetch missing tools automatically
+      handlers = {},             
+      automatic_installation = true,
+      automatic_setup = true,
     },
   },
 
@@ -31,14 +25,19 @@ return {
       ensure_installed = {
         "black",
         "isort",
-        "mypy",
         "shfmt",
         "yamllint",
         "yamlfmt",
         "hadolint",
-        "terraform_fmt", -- alias recognised by mason-null-ls
+        "terraform_fmt",
+        "shellcheck",
+        "hadolint",
+        "tflint",
+
       },
-      automatic_installation = true,
+      automatic_installation = true,   
+      automatic_setup        = true,     
+      handlers               = {},      
     },
   },
 
