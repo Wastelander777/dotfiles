@@ -6,7 +6,8 @@ return {
   { "williamboman/mason.nvim", lazy = false, config = true },
   {
     "williamboman/mason-lspconfig.nvim",
-    lazy = false,
+    lazy = true,
+    event  = { "BufReadPre", "BufNewFile" },
     opts = {
       handlers = {},             
       automatic_installation = true,
@@ -19,7 +20,8 @@ return {
   ---------------------------------------------------------------------------
   {
     "jay-babu/mason-null-ls.nvim",
-    lazy = false,
+    lazy = true,
+    event  = { "BufReadPre", "BufNewFile" },
     dependencies = { "nvimtools/none-ls.nvim", "williamboman/mason.nvim" },
     opts = {
       ensure_installed = {
@@ -58,7 +60,8 @@ return {
   ---------------------------------------------------------------------------
   {
     "neovim/nvim-lspconfig",
-    lazy = false,
+    lazy = true,
+    event  = { "BufReadPre", "BufNewFile" },
     config = function()
       require "configs.lspconfig"
     end,
