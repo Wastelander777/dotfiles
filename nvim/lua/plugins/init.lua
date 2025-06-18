@@ -59,11 +59,6 @@ return {
   },
 
   {
-    "echasnovski/mini.nvim",
-    version = "*",
-  },
-
-  {
     "mfussenegger/nvim-jdtls",
   }, -- Java DAP helper
 
