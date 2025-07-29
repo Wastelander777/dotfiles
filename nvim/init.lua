@@ -65,14 +65,25 @@ vim.schedule(function()
   require "mappings"
 end)
 
--- Recognize docker compose files
-vim.filetype.add({
+vim.g.clipboard = {
+  name = "WslClipboard",
+  copy = {
+    ["+"] = "clip.exe",
+    ["*"] = "clip.exe",
+  },
+  paste = {
+    ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  },
+  cache_enabled = 0,
+}
+-- Organize docker compose files
+vim.filetype.add {
   pattern = {
-    -- top-level files: docker-compose.yml / compose.yaml
+    -- top-level files
     ["docker%-compose%.ya?ml"] = "yaml.docker-compose",
-    ["compose%.ya?ml"]         = "yaml.docker-compose",
-
-    -- any path that *contains* docker-compose somewhere
+    ["compose%.ya?ml"] = "yaml.docker-compose",
+    -- any path containing “docker-compose”
     [".*docker[_-]compose.*%.ya?ml"] = "yaml.docker-compose",
   },
-})
+}
