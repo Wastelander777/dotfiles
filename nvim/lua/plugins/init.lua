@@ -4,7 +4,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     opts = {
-      ensure_installed = { "lua", "python", "yaml", "bash", "java" },
+      ensure_installed = { "lua", "python", "yaml", "bash", "java", "golang" },
       highlight = { enable = true },
     },
   },
@@ -74,5 +74,9 @@ return {
   {
     import = "plugins.devops",
   },
+  {
+    import = "plugins.go",
+  },
+
 }
 
