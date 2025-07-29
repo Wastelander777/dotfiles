@@ -35,7 +35,7 @@ return {
         "shellcheck",
         "hadolint",
         "tflint",
-
+        "golangci-lint",
       },
       automatic_installation = true,   
       automatic_setup        = true,     
