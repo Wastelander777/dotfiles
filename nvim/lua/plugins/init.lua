@@ -4,7 +4,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     opts = {
-      ensure_installed = { "lua", "python", "yaml", "bash", "java", "go" },
+      ensure_installed = { "lua", "python", "yaml", "bash", "java", "go" , "html"},
       highlight = { enable = true },
     },
   },
@@ -23,7 +23,7 @@ return {
   {
     "folke/trouble.nvim",
     cmd = "Trouble",
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    opts = {}, -- default options; customize if needed
     keys = {
       {
         "<leader>xx",
@@ -60,11 +60,42 @@ return {
 
   {
     "mfussenegger/nvim-jdtls",
+    lazy = true,
   }, -- Java DAP helper
 
-  --------------------------------------------------------------------------
+  {
+    "nvim-lua/plenary.nvim",
+    lazy = true,
+  },
+
+  {
+    "MunifTanjim/nui.nvim",
+    lazy = true,
+  },
+
+  {
+    "kawre/leetcode.nvim",
+    lazy = true,
+    cmd = "Leet",
+    build = ":TSUpdate html", -- if you have `nvim-treesitter` installed for formatting
+    dependencies = {
+      "nvim-telescope/telescope.nvim", -- picker
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+    opts = {
+      lang = "python3",
+      picker = { provider = "telescope" },
+      -- configuration goes here
+      plugins = {
+        non_standalone = true,
+      },
+    },
+  },
+
+  ----------------------------------------------------------------------------
   -- Everything Mason / LSP / null-ls related is pulled in *once* below
-  --------------------------------------------------------------------------
+  ----------------------------------------------------------------------------
   {
     import = "plugins.mason",
   },
@@ -77,6 +108,5 @@ return {
   {
     import = "plugins.go",
   },
-
 }
 
