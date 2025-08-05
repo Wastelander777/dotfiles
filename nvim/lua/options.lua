@@ -17,12 +17,10 @@ vim.diagnostic.config({
   underline        = true,
   update_in_insert = false,
 })
-
--- keep the sign column always visible
+-- Tweaks
 vim.wo.signcolumn     = "yes"
--- enable relative line numbers by default
 vim.wo.relativenumber = true
-
--- Extra tweaks -------------------------------------------------------------
+vim.o.tabstop = 4
+vim.o.swapfile = false
 vim.o.cursorlineopt = "both"
 
