@@ -22,7 +22,7 @@ end
 local default_servers = {
   "lemminx",
   "jdtls",
-  "ruff_lsp",
+  "ruff",
 }
 
 for _, name in ipairs(default_servers) do
