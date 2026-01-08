@@ -35,6 +35,7 @@ return {
         "docker_compose_language_service",
         "terraformls",
         "helm_ls", -- Kubernetes/Helm charts
+        "postgres_lsp",
       })
     end,
   },
