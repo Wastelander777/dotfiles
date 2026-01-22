@@ -4,8 +4,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     opts = {
-      ensure_installed = { "lua", "python", "yaml", "bash", "java", "go" , "html"},
-      highlight = { enable = true },
+      ensure_installed = { "lua", "python", "yaml", "bash", "java", "go", "html", "sql" },
+      highlight = { enable = true, additional_vim_regex_highlighting = false },
     },
   },
 
@@ -100,13 +100,9 @@ return {
     import = "plugins.mason",
   },
   {
-    import = "plugins.python",
+    import = "plugins.none-ls",
   },
   {
-    import = "plugins.devops",
-  },
-  {
-    import = "plugins.go",
+    import = "plugins.lint",
   },
 }
-
