@@ -40,6 +40,8 @@ return {
         "yamlls",
         "dockerls",
         "terraformls",
+        "helm_ls",
+        "postgres_lsp",
         "ruff",
         "pyright",
       },

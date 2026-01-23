@@ -22,6 +22,7 @@ return {
 
         -- Go
         nls.builtins.formatting.goimports,
+
       },
     }
   end,

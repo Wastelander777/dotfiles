@@ -10,6 +10,8 @@ local servers = {
   terraformls = {},
   pyright = {},
   ruff = {},
+  postres_lsp = {},
+  helm_ls = {},
 }
 
 for name, opts in pairs(servers) do

@@ -63,11 +63,6 @@ return {
   },
 
   {
-    "mfussenegger/nvim-jdtls",
-    lazy = true,
-  }, -- Java DAP helper
-
-  {
     "nvim-lua/plenary.nvim",
     lazy = true,
   },
