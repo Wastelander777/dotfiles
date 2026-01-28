@@ -61,37 +61,6 @@ return {
       },
     },
   },
-
-  {
-    "nvim-lua/plenary.nvim",
-    lazy = true,
-  },
-
-  {
-    "MunifTanjim/nui.nvim",
-    lazy = true,
-  },
-
-  {
-    "kawre/leetcode.nvim",
-    lazy = true,
-    cmd = "Leet",
-    build = ":TSUpdate html", -- if you have `nvim-treesitter` installed for formatting
-    dependencies = {
-      "nvim-telescope/telescope.nvim", -- picker
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-    },
-    opts = {
-      lang = "python3",
-      picker = { provider = "telescope" },
-      -- configuration goes here
-      plugins = {
-        non_standalone = true,
-      },
-    },
-  },
-
   {
     import = "plugins.mason",
   },

@@ -10,7 +10,7 @@ local servers = {
   terraformls = {},
   pyright = {},
   ruff = {},
-  postres_lsp = {},
+  postgres_lsp = {},
   helm_ls = {},
 }
 

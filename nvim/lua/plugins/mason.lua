@@ -20,8 +20,6 @@ return {
         "terraform_fmt",
       },
       automatic_installation = true,
-      automatic_setup = true,
-      handlers = {},
     },
   },
 
@@ -46,8 +44,6 @@ return {
         "pyright",
       },
       automatic_installation = true,
-      automatic_setup = true,
-      handlers = {},
     },
   },
 }
