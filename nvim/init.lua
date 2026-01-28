@@ -1,14 +1,10 @@
--- ~/.config/nvim/init.lua
----------------------------------------------------------------
--- 0. Globals
----------------------------------------------------------------
+-- globals
 vim.g.mapleader = " "
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
 
----------------------------------------------------------------
--- 1. Bootstrap lazy.nvim (only if it isn’t already downloaded)
----------------------------------------------------------------
+-- lazy.nvim
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
     "git",
@@ -19,73 +15,83 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   }
 end
+
 vim.opt.rtp:prepend(lazypath)
 
----------------------------------------------------------------
--- 2. Lazy-specific config (separate to keep init.lua tiny)
----------------------------------------------------------------
-local lazy_cfg = require "configs.lazy" -- your existing file
+-- plugins
+local lazy_cfg = require "configs.lazy"
 
----------------------------------------------------------------
--- 3. Start Lazy and load all specs
----------------------------------------------------------------
 require("lazy").setup({
-  -- Load NvChad’s core plugins first
   { "NvChad/NvChad", lazy = false, branch = "v2.5", import = "nvchad.plugins" },
-  -- Everything under lua/plugins/**.lua
   { import = "plugins" },
 }, lazy_cfg)
 
-require("oil").setup()
----------------------------------------------------------------
--- 4. Load NvChad’s theme & statusline after base46 cache exists
----------------------------------------------------------------
-dofile(vim.g.base46_cache .. "defaults") -- colours
-dofile(vim.g.base46_cache .. "statusline") -- lualine wrapper
+-- nvchad ui
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
 
----------------------------------------------------------------
--- 5. Options, user autocmds, keymaps
----------------------------------------------------------------
-require "options" -- your vim.opt settings
-
--- User autocmds that don’t belong in a plugin spec
-local misc = vim.api.nvim_create_augroup("misc_augroup", { clear = true })
-
--- Restore cursor position
-vim.api.nvim_create_autocmd("BufReadPost", {
-  group = misc,
-  pattern = "*",
-  callback = function()
-    pcall(vim.cmd.normal, 'g`"')
+-- autocmds
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  callback = function(args)
+    pcall(vim.treesitter.start, args.buf)
   end,
 })
 
--- Load mappings *after* plugins so they can map plugin keys
+local autocmd = vim.api.nvim_create_autocmd
+
+autocmd("BufReadPost", {
+  pattern = "*",
+  callback = function()
+    local line = vim.fn.line "'\""
+    if
+      line > 1
+      and line <= vim.fn.line "$"
+      and vim.bo.filetype ~= "commit"
+      and vim.fn.index({ "xxd", "gitrebase" }, vim.bo.filetype) == -1
+    then
+      vim.cmd 'normal! g`"'
+    end
+  end,
+})
+
+-- config
+require("oil").setup()
+require "options"
+
+require("nvim-treesitter").install {
+  "go",
+  "python",
+  "bash",
+  "sql",
+  "lua",
+  "yaml",
+  "html",
+  "json",
+}
+
 vim.schedule(function()
   require "mappings"
 end)
 
+-- clipboard
+vim.g.clipboard = {
+  name = "WslClipboard",
+  copy = {
+    ["+"] = "clip.exe",
+    ["*"] = "clip.exe",
+  },
+  paste = {
+    ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  },
+  cache_enabled = 0,
+}
 
--- Just for Windows using WSL
--- vim.g.clipboard = {
---   name = "WslClipboard",
---   copy = {
---     ["+"] = "clip.exe",
---     ["*"] = "clip.exe",
---   },
---   paste = {
---     ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
---     ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
---   },
---   cache_enabled = 0,
--- }
--- Organize docker compose files
+-- filetypes
 vim.filetype.add {
   pattern = {
-    -- top-level files
     ["docker%-compose%.ya?ml"] = "yaml.docker-compose",
     ["compose%.ya?ml"] = "yaml.docker-compose",
-    -- any path containing “docker-compose”
     [".*docker[_-]compose.*%.ya?ml"] = "yaml.docker-compose",
   },
 }

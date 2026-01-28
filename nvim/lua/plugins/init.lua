@@ -2,13 +2,13 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     build = ":TSUpdate",
     opts = {
       ensure_installed = { "lua", "python", "yaml", "bash", "java", "go" , "html"},
       highlight = { enable = true },
     },
   },
-
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
@@ -57,56 +57,13 @@ return {
       },
     },
   },
-
-  {
-    "mfussenegger/nvim-jdtls",
-    lazy = true,
-  }, -- Java DAP helper
-
-  {
-    "nvim-lua/plenary.nvim",
-    lazy = true,
-  },
-
-  {
-    "MunifTanjim/nui.nvim",
-    lazy = true,
-  },
-
-  {
-    "kawre/leetcode.nvim",
-    lazy = true,
-    cmd = "Leet",
-    build = ":TSUpdate html", -- if you have `nvim-treesitter` installed for formatting
-    dependencies = {
-      "nvim-telescope/telescope.nvim", -- picker
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-    },
-    opts = {
-      lang = "python3",
-      picker = { provider = "telescope" },
-      -- configuration goes here
-      plugins = {
-        non_standalone = true,
-      },
-    },
-  },
-
-  ----------------------------------------------------------------------------
-  -- Everything Mason / LSP / null-ls related is pulled in *once* below
-  ----------------------------------------------------------------------------
   {
     import = "plugins.mason",
   },
   {
-    import = "plugins.python",
+    import = "plugins.none-ls",
   },
   {
-    import = "plugins.devops",
-  },
-  {
-    import = "plugins.go",
+    import = "plugins.lint",
   },
 }
-
