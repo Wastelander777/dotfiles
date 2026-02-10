@@ -57,7 +57,7 @@ autocmd("BufReadPost", {
 -- config
 require("oil").setup()
 require "options"
-
+require "configs.lspconfig"
 require("nvim-treesitter").install {
   "go",
   "python",
@@ -72,7 +72,7 @@ require("nvim-treesitter").install {
 vim.schedule(function()
   require "mappings"
 end)
-
+vim.diagnostic.config({virtual_text = false})
 -- clipboard
 vim.g.clipboard = {
   name = "WslClipboard",

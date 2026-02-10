@@ -1,7 +1,7 @@
 require("nvchad.options")
 
--- Diagnostics --------------------------------------------------------------
 vim.diagnostic.config({
+  -- virtual text overrided at init.lua
   virtual_text     = false,
   virtual_lines    = { current_line = true },
   float            = { source = "always" },

@@ -8,10 +8,26 @@ local servers = {
   yamlls = {},
   dockerls = {},
   terraformls = {},
-  pyright = {},
-  ruff = {},
   postgres_lsp = {},
   helm_ls = {},
+  basedpyright = {
+    settings = {
+      basedpyright = {
+        analysis = {
+          typeCheckingMode = "standard",
+          autoSearchPaths = true,
+          useLibraryCodeForTypes = true,
+          diagnosticMode = "openFilesOnly",
+          diagnosticSeverityOverrides = {
+            reportUnusedImport = "warning",
+            reportOptionalSubscript = "none",
+            reportAny = "none",
+            reportExplicitAny = "none",
+          },
+        },
+      },
+    },
+  },
 }
 
 for name, opts in pairs(servers) do
