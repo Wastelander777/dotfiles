@@ -28,6 +28,11 @@ return {
   },
 
   {
+    "Wastelander777/clip-paste.nvim",
+    lazy = false,
+  },
+
+  {
     import = "plugins.mason",
   },
 

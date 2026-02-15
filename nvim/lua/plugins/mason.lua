@@ -34,6 +34,7 @@ return {
     opts = {
       ensure_installed = {
         "gopls",
+        "goimports",
         "bashls",
         "yamlls",
         "dockerls",
