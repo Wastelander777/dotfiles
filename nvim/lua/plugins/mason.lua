@@ -18,6 +18,7 @@ return {
         "shfmt",
         "yamlfmt",
         "terraform_fmt",
+        "goimports",
       },
       automatic_installation = true,
     },
@@ -34,7 +35,6 @@ return {
     opts = {
       ensure_installed = {
         "gopls",
-        "goimports",
         "bashls",
         "yamlls",
         "dockerls",
