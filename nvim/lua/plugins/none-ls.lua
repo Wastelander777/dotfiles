@@ -8,8 +8,7 @@ return {
     return {
       sources = {
         -- Python
-        nls.builtins.formatting.black,
-        nls.builtins.formatting.isort,
+        nls.builtins.formatting.ruff,
 
         -- Shell
         nls.builtins.formatting.shfmt,

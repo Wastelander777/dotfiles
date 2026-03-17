@@ -11,7 +11,7 @@ return {
         "yamllint",
         "hadolint",
         "tflint",
-        "isort",
+        "ruff",
 
         -- Formatters
         "stylua",
