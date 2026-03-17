@@ -28,7 +28,7 @@ return {
   },
 
   {
-    "Wastelander777/clip-paste.nvim",
+    "pugarte7/clip-paste.nvim",
     lazy = false,
   },
 
