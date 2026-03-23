@@ -100,6 +100,28 @@
                 "shell_command": "osascript -e 'tell application \"Finder\" to set {L,T,R,B} to bounds of window of desktop' -e 'tell application \"System Events\"' -e 'set fp to first process whose frontmost is true' -e 'set SW to R - L' -e 'set SH to B - T - 25' -e 'set NW to (SW * 4 / 5) as integer' -e 'set NH to (SH * 4 / 5) as integer' -e 'set position of first window of fp to {(SW - NW) / 2, T + 25 + (SH - NH) / 2}' -e 'set size of first window of fp to {NW, NH}' -e 'end tell'"
             }],
             "type": "basic"
+        },
+        {
+            "description": "Mouse button 4 → back",
+            "from": {
+                "pointing_button": "button4"
+            },
+            "to": [{
+                "key_code": "open_bracket",
+                "modifiers": ["command"]
+            }],
+            "type": "basic"
+        },
+        {
+            "description": "Mouse button 5 → forward",
+            "from": {
+                "pointing_button": "button5"
+            },
+            "to": [{
+                "key_code": "close_bracket",
+                "modifiers": ["command"]
+            }],
+            "type": "basic"
         }
     ]
 }
