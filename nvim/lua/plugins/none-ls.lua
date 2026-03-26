@@ -7,20 +7,19 @@ return {
 
     return {
       sources = {
-        -- Python
-        nls.builtins.formatting.ruff,
-
         -- Shell
         nls.builtins.formatting.shfmt,
 
         -- YAML
         nls.builtins.formatting.yamlfmt,
 
-        -- Terraform
-        nls.builtins.formatting.terraform_fmt,
-
         -- Go
         nls.builtins.formatting.goimports,
+
+        -- SQL
+        nls.builtins.formatting.sqlfluff.with({
+          extra_args = { "--dialect", "postgres" },
+        }),
 
       },
     }

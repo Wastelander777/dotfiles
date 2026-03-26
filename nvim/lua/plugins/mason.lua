@@ -3,6 +3,13 @@ return {
   {
     "williamboman/mason.nvim",
     lazy = false,
+    opts = {},
+  },
+
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    lazy = false,
+    dependencies = { "williamboman/mason.nvim" },
     opts = {
       ensure_installed = {
         -- Linters
@@ -12,15 +19,16 @@ return {
         "hadolint",
         "tflint",
         "ruff",
+        "sqlfluff",
 
         -- Formatters
         "stylua",
         "shfmt",
         "yamlfmt",
-        "terraform_fmt",
         "goimports",
       },
-      automatic_installation = true,
+      auto_update = false,
+      run_on_start = true,
     },
   },
 
@@ -40,7 +48,6 @@ return {
         "dockerls",
         "terraformls",
         "helm_ls",
-        "postgres_lsp",
         "basedpyright",
       },
       automatic_installation = true,

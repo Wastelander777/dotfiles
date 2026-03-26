@@ -7,8 +7,9 @@ local formatters_by_ft = {
   html = { "prettier" },
   sh = { "shfmt" },
   yaml = { "yamlfmt" },
-  terraform = { "terraform_fmt" },
   go = { "goimports" },
+  sql = { "sqlfluff" },
+  pgsql = { "sqlfluff" },
 }
 
 local format_on_save = {

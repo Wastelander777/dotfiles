@@ -11,6 +11,8 @@ return {
       yaml = { "yamllint" },
       dockerfile = { "hadolint" },
       terraform = { "tflint" },
+      sql = { "sqlfluff" },
+      pgsql = { "sqlfluff" },
     }
 
     vim.api.nvim_create_autocmd(
